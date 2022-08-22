@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "141809539440",
+    "project_id": "nobu-82346",
+    "storage_bucket": "nobu-82346.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141809539440:android:ada2235dca58ff1aed57b5",
+        "android_client_info": {
+          "package_name": "com.yuta.nobu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141809539440-4ia2i9a8lsgf72kacfri28obq31kbhil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUGaY_GHmw17deo8b6ZfwFf0QlZFm4tm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141809539440-4ia2i9a8lsgf72kacfri28obq31kbhil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
