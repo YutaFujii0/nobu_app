@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../providers/counter.dart';
+import '../../domainModels/activity.dart';
+import '../../providers/today_activities.dard.dart';
+import '../../widgets/activity_list_item.dart';
 import '../../widgets/bottom_menu.dart';
 
 class MyHomePage extends ConsumerWidget {
@@ -8,39 +10,52 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final counter = ref.watch(counterProvider);
+    List<Activity> activities = ref.watch(todayActivitiesProvider);
+    ref.read(todayActivitiesProvider.notifier).getAll();
 
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
     String today = date.toString().replaceAll("00:00:00.000", "");
 
-    bool showFab = true;
     bool showNotch = true;
     FloatingActionButtonLocation fabLocation = FloatingActionButtonLocation.endDocked;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(today),
+        title: Text("${today} 今日のロビン"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: ListView(
+              children: [
+                for (final activity in activities)
+                  ActivityListItem(activity)
+              ],
             ),
-            Text(
-              '$counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 400,
+            child: Column(
+              children: const <Widget>[
+                Text(
+                  '今日はよく寝てる?',
+                ),
+                Text(
+                  '今日は元気?',
+                ),
+              ]
+            )
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(counterProvider.notifier).increment();
+          const activity = Activity(id: "11", description: "todo", datetime: "1011");
+          ref.read(todayActivitiesProvider.notifier).addActivity(activity);
         },
-        tooltip: 'Increment',
+        tooltip: 'Add new activity',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
       bottomNavigationBar: BottomMenu(
