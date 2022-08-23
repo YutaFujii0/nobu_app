@@ -1,38 +1,26 @@
 import 'package:flutter/material.dart';
-import '../components/bottom_menu.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../providers/counter.dart';
+import '../../widgets/bottom_menu.dart';
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerWidget {
   const MyHomePage({Key? key}) : super(key: key);
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String _date = _today();
-  bool _showFab = true;
-  bool _showNotch = true;
-  FloatingActionButtonLocation _fabLocation =
-      FloatingActionButtonLocation.endDocked;
-
-
-  static String _today() {
-    DateTime now = new DateTime.now();
-    DateTime date = new DateTime(now.year, now.month, now.day);
-    return date.toString().replaceAll("00:00:00.000", "");
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final counter = ref.watch(counterProvider);
+
+    DateTime now = DateTime.now();
+    DateTime date = DateTime(now.year, now.month, now.day);
+    String today = date.toString().replaceAll("00:00:00.000", "");
+
+    bool showFab = true;
+    bool showNotch = true;
+    FloatingActionButtonLocation fabLocation = FloatingActionButtonLocation.endDocked;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(_date),
+        title: Text(today),
       ),
       body: Center(
         child: Column(
@@ -42,20 +30,22 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '$counter',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          ref.read(counterProvider.notifier).increment();
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
       bottomNavigationBar: BottomMenu(
-        fabLocation: _fabLocation,
-        shape: _showNotch ? const CircularNotchedRectangle() : null,
+        fabLocation: fabLocation,
+        shape: showNotch ? const CircularNotchedRectangle() : null,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

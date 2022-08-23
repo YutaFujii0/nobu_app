@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '/models/global_theme.dart';
 import './screens/home/base.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final ThemeData globalTheme = Provider.of<GlobalTheme>(context).globalTheme;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(global_theme_provider);
+
     return MaterialApp(
       title: 'Nobu Diary',
-      theme: globalTheme,
+      theme: theme.globalTheme,
       home: const MyHomePage(),
     );
   }

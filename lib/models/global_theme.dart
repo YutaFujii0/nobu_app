@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+final global_theme_provider = StateProvider<GlobalTheme>((ref) {
+  return GlobalTheme();
+});
 
 const Color customBlueGrey = Color(0xff596e7d);
 const Color customLightBlue = Color(0xff6ce3f8);
