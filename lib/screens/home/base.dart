@@ -17,15 +17,11 @@ class MyHomePage extends ConsumerWidget {
     DateTime date = DateTime(now.year, now.month, now.day);
     String today = date.toString().replaceAll("00:00:00.000", "");
 
-    bool showNotch = true;
-    FloatingActionButtonLocation fabLocation = FloatingActionButtonLocation.endDocked;
-
     return Scaffold(
       appBar: AppBar(
         title: Text("${today} 今日のロビン"),
       ),
       body: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
             child: ListView(
@@ -50,18 +46,16 @@ class MyHomePage extends ConsumerWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           const activity = Activity(id: "11", description: "todo", datetime: "1011");
           ref.read(todayActivitiesProvider.notifier).addActivity(activity);
         },
         tooltip: 'Add new activity',
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: const Text('のぶ何してる？')
       ), // This trailing comma makes auto-formatting nicer for build methods.
-      bottomNavigationBar: BottomMenu(
-        fabLocation: fabLocation,
-        shape: showNotch ? const CircularNotchedRectangle() : null,
-      ),
+      bottomNavigationBar: const BottomMenu(button: true),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
