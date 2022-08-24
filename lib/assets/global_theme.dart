@@ -6,7 +6,7 @@ final global_theme_provider = StateProvider<GlobalTheme>((ref) {
 });
 
 const Color customBlueGrey = Color(0xff596e7d);
-const Color customLightBlue = Color(0xff6ce3f8);
+const Color customLightBlue = Color(0xff0b324d);
 const Color customWhite = Color(0xffe8e8e8);
 const Color customLightWhite = Colors.white;
 
