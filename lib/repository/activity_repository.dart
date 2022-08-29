@@ -36,36 +36,43 @@ class ActivityRepository {
 const jsonObject = [
   {
     "id": 1,
+    "category":"起きた",
     "title":"起きた",
     "datetime":"07:20"
   },
   {
     "id": 1,
+    "category":"おしっこ",
     "title":"おしっこ",
     "datetime":"07:22"
   },
   {
     "id": 1,
+    "category":"ごはん",
     "title":"ご飯",
     "datetime":"08:00"
   },
   {
     "id": 1,
+    "category":"お水",
     "title":"お水",
     "datetime":"09:43"
   },
   {
     "id": 1,
+    "category":"寝た",
     "title":"寝た",
     "datetime":"10:29"
   },
   {
     "id": 1,
+    "category":"起きた",
     "title":"起きた",
     "datetime":"11:00"
   },
   {
     "id": 1,
+    "category":"ごはん",
     "title":"フード",
     "datetime":"11:20"
   }

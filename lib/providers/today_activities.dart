@@ -18,6 +18,7 @@ class TodayActivitiesProvider {
   }) async {
     final activity = Activity(
       id: null,
+      category: ActivityCategory.cry,
       description: description,
       datetime: DateTime.now().toString(),
     );

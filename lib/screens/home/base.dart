@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nobu/screens/home/new.dart';
 import '../../domainModels/activity.dart';
 import '../../providers/all_providers.dart';
-import '../../providers/today_activities.dard.dart';
+import '../../providers/today_activities.dart';
 import '../../widgets/activity_list_item.dart';
 import '../../widgets/bottom_menu.dart';
 
@@ -48,8 +49,10 @@ class MyHomePage extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          const activity = Activity(id: "11", description: "todo", datetime: "1011");
-          ref.read(todayActivitiesProvider).create(description: activity.description);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NewActivity()),
+          );
         },
         tooltip: 'Add new activity',
         icon: const Icon(Icons.add),
