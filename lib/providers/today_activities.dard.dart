@@ -2,22 +2,30 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nobu/repository/activity_repository.dart';
 
 import '../domainModels/activity.dart';
+import 'all_providers.dart';
 
-class TodayActivitiesNotifier extends StateNotifier<List<Activity>> {
-  TodayActivitiesNotifier(): super([]);
+class TodayActivitiesProvider {
+  final ActivityRepository _repo;
 
-  final repo = ActivityRepository();
+  TodayActivitiesProvider(this._repo);
 
-//  fetching
-  void addActivity(Activity activity) {
-    state = [...state, activity];
+  Future<List<Activity>> getAll() async {
+    return await _repo.fetchActivity();
   }
 
-  void getAll() async {
-    state = await repo.fetchActivity();
+  Future<List<Activity>> create({
+    required description,
+  }) async {
+    final activity = Activity(
+      id: null,
+      description: description,
+      datetime: DateTime.now().toString(),
+    );
+    return await _repo.create(activity: activity);
   }
 }
 
-final todayActivitiesProvider = StateNotifierProvider<TodayActivitiesNotifier, List<Activity>>((ref) {
-  return TodayActivitiesNotifier();
+final todayActivitiesFuture = FutureProvider.autoDispose<List<Activity>>((ref) async {
+  final activitiesProvider = ref.watch(todayActivitiesProvider);
+  return await activitiesProvider.getAll();
 });

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domainModels/activity.dart';
+import '../../providers/all_providers.dart';
 import '../../providers/today_activities.dard.dart';
 import '../../widgets/activity_list_item.dart';
 import '../../widgets/bottom_menu.dart';
 
-class MyHomePage extends ConsumerWidget {
+class MyHomePage extends HookConsumerWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Activity> activities = ref.watch(todayActivitiesProvider);
-    ref.read(todayActivitiesProvider.notifier).getAll();
+    final activities = ref.watch(todayActivitiesFuture).value;
 
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
@@ -26,7 +26,7 @@ class MyHomePage extends ConsumerWidget {
           Expanded(
             child: ListView(
               children: [
-                for (final activity in activities)
+                for (final activity in activities!)
                   ActivityListItem(activity)
               ],
             ),
@@ -49,7 +49,7 @@ class MyHomePage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           const activity = Activity(id: "11", description: "todo", datetime: "1011");
-          ref.read(todayActivitiesProvider.notifier).addActivity(activity);
+          ref.read(todayActivitiesProvider).create(description: activity.description);
         },
         tooltip: 'Add new activity',
         icon: const Icon(Icons.add),

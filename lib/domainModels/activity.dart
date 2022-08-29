@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 class Activity {
   const Activity({required this.id, this.description = "", this.datetime = ""});
 
-  final String id;
+  final String? id;
   final String description;
   final String datetime;
 
@@ -12,7 +12,7 @@ class Activity {
     return Activity(
       id: json['id'].toString(),
       description: json['title'],
-      datetime: "10:02",
+      datetime: json['datetime'],
     );
   }
 }
