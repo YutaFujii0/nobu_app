@@ -30,6 +30,7 @@ class Activity {
     "お水": ActivityCategory.drink,
     "おしっこ": ActivityCategory.pee,
     "うんち": ActivityCategory.poop,
+    "吐いた": ActivityCategory.vomit,
     "鳴いた": ActivityCategory.cry,
     "さんぽ": ActivityCategory.takeWalk,
     "寝た": ActivityCategory.sleep,
@@ -44,6 +45,7 @@ enum ActivityCategory {
   drink,
   pee, // おしっこ
   poop, // うんち
+  vomit,
   cry,
   takeWalk,
   sleep,
