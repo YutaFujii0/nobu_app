@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-import '../assets/global_theme.dart';
 import '../domainModels/activity.dart';
 
 class ActivityListItem extends StatelessWidget {
@@ -8,13 +8,18 @@ class ActivityListItem extends StatelessWidget {
 
   final Activity activity;
 
+  String timeFormat(activity) {
+    final DateFormat formatter = DateFormat('hh:mm');
+    return formatter.format(DateTime.fromMillisecondsSinceEpoch(activity.actionAt));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          activity.datetime,
+          timeFormat(activity),
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         const Text(

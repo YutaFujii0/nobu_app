@@ -2,30 +2,36 @@ import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
 
+import '../assets/constants.dart' as Constants;
+
 @immutable
 class Activity {
   const Activity({
+    required this.yourLove,
+    required this.actionAt,
     required this.category,
     this.description = "",
-    this.datetime = ""
   });
 
+  final String yourLove;
+  final int actionAt;
   final ActivityCategory category;
   final String description;
-  final String datetime;
 
   factory Activity.fromJson(Map<String, dynamic> json) {
     return Activity(
+      yourLove: json['your_love'],
+      actionAt: json['action_at'],
       category: categoryMapper[json['category']]!,
       description: json['description'],
-      datetime: json['timestamp'],
     );
   }
 
   Map<String, dynamic> toJson() => {
+    'your_love': Constants.NOBU,
+    'action_at': actionAt,
     'category': categoryMapperInvert[category],
     'description': description,
-    'datetime': datetime,
   };
 
   static final LinkedHashMap categoryMapper = LinkedHashMap.from({

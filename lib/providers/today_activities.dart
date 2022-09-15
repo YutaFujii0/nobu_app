@@ -3,6 +3,7 @@ import 'package:nobu/repository/activity_repository.dart';
 
 import '../domainModels/activity.dart';
 import 'all_providers.dart';
+import '../assets/constants.dart' as Constants;
 
 class TodayActivitiesProvider {
   final ActivityRepository _repo;
@@ -18,9 +19,10 @@ class TodayActivitiesProvider {
     required category,
   }) async {
     final activity = Activity(
+      yourLove: Constants.NOBU,
+      actionAt: DateTime.now().millisecondsSinceEpoch,
       category: category,
       description: description,
-      datetime: DateTime.now().toString(),
     );
     return await _repo.create(activity: activity);
   }

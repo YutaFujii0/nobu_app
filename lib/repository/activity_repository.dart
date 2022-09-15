@@ -35,12 +35,14 @@ class ActivityRepository {
     );
     // return jsonResponse.take(10).map((data) => Activity.fromJson(data)).toList();
 
+    return await fetchActivity();
+
     // TODO: remove
-    var input = jsonEncode(jsonObject);
-    List obj = jsonDecode(input);
-    var array = obj.map((data) => Activity.fromJson(data)).toList();
-    array.add(activity);
-    return array;
+    // var input = jsonEncode(jsonObject);
+    // List obj = jsonDecode(input);
+    // var array = obj.map((data) => Activity.fromJson(data)).toList();
+    // array.add(activity);
+    // return array;
   }
 }
 
