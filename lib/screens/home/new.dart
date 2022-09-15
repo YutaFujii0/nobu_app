@@ -12,7 +12,7 @@ class NewActivity extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final category = ref.watch(activityCategoryProvider);
-    final note = useTextEditingController(text: '');
+    final descriptionController = useTextEditingController(text: '');
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +40,7 @@ class NewActivity extends HookConsumerWidget {
           SizedBox(
             height: 100,
             child: TextField(
-              controller: note,
+              controller: descriptionController,
             ),
           ),
         ],
@@ -48,7 +48,7 @@ class NewActivity extends HookConsumerWidget {
       bottomNavigationBar: Material(
         child: InkWell(
           onTap: () {
-            ref.read(todayActivitiesProvider).create(description: category);
+            ref.read(todayActivitiesProvider).create(description: descriptionController.text, category: category);
             Navigator.pop(context);
           },
           child: const SizedBox(

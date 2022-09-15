@@ -4,24 +4,35 @@ import '../assets/constants.dart' as Constants;
 import '../domainModels/activity.dart';
 
 class ActivityRepository {
-  Future <List<Activity>> fetchActivity() async {
-    final response = await http.get(Uri.parse("${Constants.API_DOMAIN}/todos"));
+  Future<List<Activity>> fetchActivity() async {
+    // final response = await http.get(Uri.parse("${Constants.API_DOMAIN}/todos"));
+    final response = await http.get(Uri.parse("${Constants.API_DOMAIN}/activities"));
     if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body);
-      // TODO: uncomment
-      // return jsonResponse.take(10).map((data) => Activity.fromJson(data)).toList();
+      final jsonResponse = json.decode(utf8.decode(response.bodyBytes));
 
-      // TODO: remove
-      var input = jsonEncode(jsonObject);
-      List obj = jsonDecode(input);
-      return obj.map((data) => Activity.fromJson(data)).toList();
+      // https://stackoverflow.com/questions/71522236/flutter-type-listdynamic-is-not-a-subtype-of-type-listmodel
+      return List<Activity>.from(
+          jsonResponse['data'].map((data) => Activity.fromJson(data))
+      );
+
+      // Mock response
+      // var input = jsonEncode(jsonObject);
+      // List obj = jsonDecode(input);
+      // return obj.map((data) => Activity.fromJson(data)).toList();
     } else {
       throw Exception('Unexpected error occurred!');
     }
   }
 
   Future<List<Activity>> create({activity: Activity}) async {
-    final response = await http.get(Uri.parse("${Constants.API_DOMAIN}/todos"));
+    // final response = await http.get(Uri.parse("${Constants.API_DOMAIN}/todos"));
+    final response = await http.post(
+      Uri.parse("${Constants.API_DOMAIN}/activities"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(activity),
+    );
     // return jsonResponse.take(10).map((data) => Activity.fromJson(data)).toList();
 
     // TODO: remove
@@ -35,45 +46,38 @@ class ActivityRepository {
 
 const jsonObject = [
   {
-    "id": 1,
     "category":"起きた",
-    "title":"起きた",
-    "datetime":"07:20"
+    "description":"起きた",
+    "timestamp":"07:20"
   },
   {
-    "id": 1,
     "category":"おしっこ",
-    "title":"おしっこ",
-    "datetime":"07:22"
+    "description":"おしっこ",
+    "timestamp":"07:22"
   },
   {
-    "id": 1,
     "category":"ごはん",
-    "title":"ご飯",
-    "datetime":"08:00"
+    "description":"ご飯",
+    "timestamp":"08:00"
   },
   {
-    "id": 1,
     "category":"お水",
-    "title":"お水",
-    "datetime":"09:43"
+    "description":"お水",
+    "timestamp":"09:43"
   },
   {
-    "id": 1,
     "category":"寝た",
-    "title":"寝た",
-    "datetime":"10:29"
+    "description":"寝た",
+    "timestamp":"10:29"
   },
   {
-    "id": 1,
     "category":"起きた",
-    "title":"起きた",
-    "datetime":"11:00"
+    "description":"起きた",
+    "timestamp":"11:00"
   },
   {
-    "id": 1,
     "category":"ごはん",
-    "title":"フード",
-    "datetime":"11:20"
+    "description":"フード",
+    "timestamp":"11:20"
   }
 ];

@@ -32,19 +32,19 @@ class MyHomePage extends HookConsumerWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 400,
-            child: Column(
-              children: const <Widget>[
-                Text(
-                  '今日はよく寝てる?',
-                ),
-                Text(
-                  '今日は元気?',
-                ),
-              ]
-            )
-          ),
+          // SizedBox(
+          //   height: 400,
+          //   child: Column(
+          //     children: const <Widget>[
+          //       Text(
+          //         '今日はよく寝てる?',
+          //       ),
+          //       Text(
+          //         '今日は元気?',
+          //       ),
+          //     ]
+          //   )
+          // ),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(

@@ -5,25 +5,28 @@ import 'package:flutter/cupertino.dart';
 @immutable
 class Activity {
   const Activity({
-    required this.id,
     required this.category,
     this.description = "",
     this.datetime = ""
   });
 
-  final String? id;
   final ActivityCategory category;
   final String description;
   final String datetime;
 
   factory Activity.fromJson(Map<String, dynamic> json) {
     return Activity(
-      id: json['id'].toString(),
       category: categoryMapper[json['category']]!,
-      description: json['title'],
-      datetime: json['datetime'],
+      description: json['description'],
+      datetime: json['timestamp'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'category': categoryMapperInvert[category],
+    'description': description,
+    'datetime': datetime,
+  };
 
   static final LinkedHashMap categoryMapper = LinkedHashMap.from({
     "ごはん": ActivityCategory.eat,
@@ -37,6 +40,20 @@ class Activity {
     "起きた": ActivityCategory.wakeUp,
     "病院": ActivityCategory.goHospital,
     "体温測った": ActivityCategory.measureBodyTemp,
+  });
+
+  static final LinkedHashMap categoryMapperInvert = LinkedHashMap.from({
+    ActivityCategory.eat: "ごはん" ,
+    ActivityCategory.drink: "お水" ,
+    ActivityCategory.pee: "おしっこ" ,
+    ActivityCategory.poop: "うんち" ,
+    ActivityCategory.vomit: "吐いた" ,
+    ActivityCategory.cry: "鳴いた" ,
+    ActivityCategory.takeWalk: "さんぽ" ,
+    ActivityCategory.sleep: "寝た" ,
+    ActivityCategory.wakeUp: "起きた" ,
+    ActivityCategory.goHospital: "病院" ,
+    ActivityCategory.measureBodyTemp: "体温測った" ,
   });
 }
 

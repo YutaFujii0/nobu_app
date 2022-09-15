@@ -15,10 +15,10 @@ class TodayActivitiesProvider {
 
   Future<List<Activity>> create({
     required description,
+    required category,
   }) async {
     final activity = Activity(
-      id: null,
-      category: ActivityCategory.cry,
+      category: category,
       description: description,
       datetime: DateTime.now().toString(),
     );
