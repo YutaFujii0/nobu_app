@@ -26,6 +26,14 @@ class ActivityListItem extends StatelessWidget {
           ' - ',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        Text(
+          Activity.categoryMapperInvert[activity.category],
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        const Text(
+          ' ... ',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         Expanded(
           child: Text(
             activity.description,

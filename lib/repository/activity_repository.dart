@@ -24,7 +24,8 @@ class ActivityRepository {
     }
   }
 
-  Future<List<Activity>> create({activity: Activity}) async {
+  // TODO: return List<Activity> so that client won't need to call getAll() again
+  void create({activity: Activity}) async {
     // final response = await http.get(Uri.parse("${Constants.API_DOMAIN}/todos"));
     final response = await http.post(
       Uri.parse("${Constants.API_DOMAIN}/activities"),
@@ -35,7 +36,7 @@ class ActivityRepository {
     );
     // return jsonResponse.take(10).map((data) => Activity.fromJson(data)).toList();
 
-    return await fetchActivity();
+    return;
 
     // TODO: remove
     // var input = jsonEncode(jsonObject);
@@ -46,40 +47,40 @@ class ActivityRepository {
   }
 }
 
-const jsonObject = [
-  {
-    "category":"起きた",
-    "description":"起きた",
-    "timestamp":"07:20"
-  },
-  {
-    "category":"おしっこ",
-    "description":"おしっこ",
-    "timestamp":"07:22"
-  },
-  {
-    "category":"ごはん",
-    "description":"ご飯",
-    "timestamp":"08:00"
-  },
-  {
-    "category":"お水",
-    "description":"お水",
-    "timestamp":"09:43"
-  },
-  {
-    "category":"寝た",
-    "description":"寝た",
-    "timestamp":"10:29"
-  },
-  {
-    "category":"起きた",
-    "description":"起きた",
-    "timestamp":"11:00"
-  },
-  {
-    "category":"ごはん",
-    "description":"フード",
-    "timestamp":"11:20"
-  }
-];
+// const jsonObject = [
+//   {
+//     "category":"起きた",
+//     "description":"起きた",
+//     "timestamp":"07:20"
+//   },
+//   {
+//     "category":"おしっこ",
+//     "description":"おしっこ",
+//     "timestamp":"07:22"
+//   },
+//   {
+//     "category":"ごはん",
+//     "description":"ご飯",
+//     "timestamp":"08:00"
+//   },
+//   {
+//     "category":"お水",
+//     "description":"お水",
+//     "timestamp":"09:43"
+//   },
+//   {
+//     "category":"寝た",
+//     "description":"寝た",
+//     "timestamp":"10:29"
+//   },
+//   {
+//     "category":"起きた",
+//     "description":"起きた",
+//     "timestamp":"11:00"
+//   },
+//   {
+//     "category":"ごはん",
+//     "description":"フード",
+//     "timestamp":"11:20"
+//   }
+// ];

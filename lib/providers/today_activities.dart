@@ -14,7 +14,7 @@ class TodayActivitiesProvider {
     return await _repo.fetchActivity();
   }
 
-  Future<List<Activity>> create({
+  void create({
     required description,
     required category,
   }) async {
@@ -24,7 +24,7 @@ class TodayActivitiesProvider {
       category: category,
       description: description,
     );
-    return await _repo.create(activity: activity);
+    _repo.create(activity: activity);
   }
 }
 
